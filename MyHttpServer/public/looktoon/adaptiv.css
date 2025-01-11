@@ -1,0 +1,151 @@
+﻿@media only screen and (max-width: 390px) {
+    /* Основной стиль */
+    .open-modal-btn {
+        display: block;
+        margin: 13px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .open-modal-btn:hover {
+            background-color: #45a049;
+        }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+    }
+
+        .modal.show {
+            display: flex;
+        }
+
+    .modal-content {
+        background-color: #fefefe;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 400px;
+        max-width: 90%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .modal-content button:hover {
+                background-color: #45a049;
+            }
+
+    .cancelbtn {
+        background-color: #f44336;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .cancelbtn:hover {
+            background-color: #d32f2f;
+        }
+
+    .close {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #aaa;
+        cursor: pointer;
+    }
+
+        .close:hover {
+            color: black;
+        }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: #1E1F23;
+        background-repeat: repeat;
+        background-position: top center;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 90%;
+            padding: 15px;
+        }
+
+        .open-modal-btn {
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+
+        .cancelbtn,
+        .modal-content button {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .close {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-content {
+            width: 95%;
+            padding: 10px;
+        }
+
+        .open-modal-btn {
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+
+        .cancelbtn,
+        .modal-content button {
+            font-size: 12px;
+            padding: 6px;
+        }
+
+        .close {
+            font-size: 20px;
+        }
+    }
+}

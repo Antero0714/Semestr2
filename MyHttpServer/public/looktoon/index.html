@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../looktoon/images/logo.jpg" />
+    <title>
+        Смотреть мультфильмы онлайн в хорошем качестве
+    </title>
+    <style>
+        .error-message {
+            color: red;
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .placeholder {
+            display: inline; /* Отображаем кнопку по умолчанию */
+        }
+
+            .placeholder.hidden {
+                display: none; /* Скрываем кнопку */
+            }
+    </style>
+    <link rel="stylesheet" href="looktoon/style.css">
+    <link rel="stylesheet" href="looktoon/adaptiv.css"> <!-- Подключение файла для адаптивности -->
+    <link rel="shortcut icon" src="looktoon/images/logo(1).jpg" type="image/svg">
+</head>
+
+<body>
+    <div class="topmenu">
+        <div class="topmenudecor" id="wrap">
+            <li>LOOKTOON.LOL</li>
+            <a href="https://adultmult.club/cartoon-collection.html" target="_blank">
+                <li class="par-cartoon">Список &nbsp; мультсериалов</li>
+            </a>
+            <a href="https://animelist.lol" target="_blank">
+                <li class="par-anime">Аниме</li>
+            </a>
+            <a href="https://adultmult.club/cartoon-collection.html" target="_blank">
+                <li class="par-tv">Сериалы</li>
+            </a>
+            <!-- Кнопка для открытия модального окна входа -->
+            <button class="open-modal-btn" onclick="window.location.href='/ENTRY';">
+                {{EntryOrName}}
+            </button>
+            {{CheckControl}}
+
+            <!-- Login Modal -->
+            <div id="id01" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('id01')">&times;</span>
+
+                    <!-- Login Form -->
+                    <form method="POST" action="/main" id="loginForm">
+                        <div class="container">
+                            <label for="login-uname"><b>Имя пользователя</b></label>
+                            <input type="text" name="username" placeholder="Введите имя" id="login-uname" required>
+                            <small class="error-message"></small>
+                            <span id="login-username-error" class="error-message">Неправильное имя пользователя</span>
+
+                            <label for="login-email"><b>Email</b></label>
+                            <input type="email" name="email" placeholder="Введите email" id="login-email" required>
+                            <small class="error-message"></small>
+                            <span id="login-email-error" class="error-message">Неправильный email</span>
+
+                            <label for="login-psw"><b>Пароль</b></label>
+                            <input type="password" name="password" placeholder="Введите пароль" id="login-psw" required>
+                            <small class="error-message"></small>
+                            <span id="login-password-error" class="error-message">Неправильный пароль</span>
+
+                            <!--                            <div id="global-message" style="text-align: center; color: red; font-size: 0.9rem; margin-top: 10px; display: none;">
+                                            {{ErrorMessage}}
+                                        </div>-->
+
+                            <button type="submit">Войти</button>
+                            <button type="button" onclick="switchToRegister()">Нет аккаунта? Зарегистрироваться.</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Registration Modal -->
+            <div id="id02" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('id02')">&times;</span>
+
+                    <!-- Registration Form -->
+                    <form method="POST" action="/register" id="registerForm">
+                        <div class="container">
+                            <label for="register-uname"><b>Имя пользователя</b></label>
+                            <input type="text" name="username" placeholder="Введите имя" id="register-uname" required>
+                            <span id="register-username-error" class="error-message">Имя пользователя уже занято</span>
+
+                            <label for="register-email"><b>Email</b></label>
+                            <input type="email" name="email" placeholder="Введите email" id="register-email" required>
+                            <span id="register-email-error" class="error-message">Email уже используется</span>
+
+                            <label for="register-psw"><b>Пароль</b></label>
+                            <input type="password" name="password" placeholder="Введите пароль" id="register-psw" required>
+                            <span id="register-password-error" class="error-message">Пароль слишком короткий</span>
+
+                            <button type="submit">Зарегистрироваться</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <style>
+                .error-message {
+                    color: red;
+                    font-size: 0.875rem;
+                    margin-top: 0.25rem;
+                    display: none;
+                }
+
+                .error-border {
+                    border-color: red !important;
+                    background-color: #ffe6e6 !important;
+                }
+            </style>
+
+
+            <script>
+                function openModal(modalId) {
+                    document.getElementById(modalId).style.display = 'block';
+                }
+
+                function closeModal(modalId) {
+                    document.getElementById(modalId).style.display = 'none';
+                }
+
+                function switchToRegister() {
+                    closeModal('id01');
+                    openModal('id02');
+                }
+
+                function clearErrors(formId) {
+                    const errorMessages = document.querySelectorAll(`#${formId} .error-message`);
+                    errorMessages.forEach(error => error.style.display = 'none');
+                }
+
+                document.getElementById('loginForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    const formData = new URLSearchParams(new FormData(this));
+
+                    fetch('/main', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: formData.toString(),
+                    })
+                        .catch(error => {
+                            alert('Ошибка сети: ' + error.message);
+                        });
+                });
+
+                document.getElementById('registerForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    const formData = new URLSearchParams(new FormData(this));
+
+                    fetch('/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: formData.toString(),
+                    })
+                        .catch(error => {
+                            alert('Ошибка сети: ' + error.message);
+                        });
+                });
+
+
+                function validateForm() {
+                    let isValid = true;
+
+                    const fields = [
+                        {
+                            id: 'firstName',
+                            validation: value => value.trim() !== '' && !/\d/.test(value),
+                            error: 'Имя не должно быть пустым или не долнжо содержать цифры!'
+                        },
+                        {
+                            id: 'lastName',
+                            validation: value => value.trim() !== '' && !/\d/.test(value),
+                            error: 'Фамилия не должна быть пустой или не должно содержать цифры!'
+                        },
+                        {
+                            id: 'email',
+                            validation: value => value.trim() !== '' && value.includes('@'),
+                            error: 'Почта не должна быть пустой или должен быть знак "@"'
+                        },
+                        {
+                            id: 'password',
+                            validation: value => value.trim() !== '',
+                            error: 'Пароль не должен быть пустым!'
+                        },
+                        {
+                            id: 'confirmPassword',
+                            validation: value => value.trim() !== '' && value === document.getElementById('password').value,
+                            error: 'Пароли должны совпадать или не быть пустыми'
+                        }
+                    ];
+
+                    fields.forEach(field => {
+                        const input = document.getElementById(field.id);
+                        const errorMessage = input.nextElementSibling;
+                        if (!field.validation(input.value)) {
+                            input.classList.add('error-border');
+                            errorMessage.textContent = field.error;
+                            errorMessage.style.display = 'block';
+                            isValid = false;
+                        } else {
+                            input.classList.remove('error-border');
+                            errorMessage.style.display = 'none';
+                        }
+                    });
+
+                    if (isValid) {
+                        document.getElementById('registrationForm').submit();
+                    }
+                }
+
+                // Очистка ошибок
+                function clearErrors(formId) {
+                    const form = document.getElementById(formId);
+                    const errorMessages = form.querySelectorAll('.error-message');
+                    const inputs = form.querySelectorAll('input');
+
+                    errorMessages.forEach(error => error.style.display = 'none');
+                    inputs.forEach(input => input.classList.remove('error-border'));
+                }
+
+                // Проверка логина
+                function validateLoginForm(event) {
+                    event.preventDefault();
+                    const username = document.getElementById('login-uname');
+                    const email = document.getElementById('login-email');
+                    const password = document.getElementById('login-psw');
+                    let isValid = true;
+
+                    clearErrors('loginForm');
+
+                    if (username.value.trim() === '') {
+                        showError(username, 'Введите имя пользователя.');
+                        isValid = false;
+                    }
+                    if (email.value.trim() === '' || !email.value.includes('@')) {
+                        showError(email, 'Введите корректный email.');
+                        isValid = false;
+                    }
+                    if (password.value.trim() === '') {
+                        showError(password, 'Введите пароль.');
+                        isValid = false;
+                    }
+
+                    if (isValid) {
+                        document.getElementById('loginForm').submit();
+                    }
+                }
+
+                // Проверка регистрации
+                function validateRegisterForm(event) {
+                    event.preventDefault();
+                    const username = document.getElementById('register-uname');
+                    const email = document.getElementById('register-email');
+                    const password = document.getElementById('register-psw');
+                    let isValid = true;
+
+                    clearErrors('registerForm');
+
+                    if (username.value.trim() === '') {
+                        showError(username, 'Введите имя пользователя.');
+                        isValid = false;
+                    }
+                    if (email.value.trim() === '' || !email.value.includes('@')) {
+                        showError(email, 'Введите корректный email.');
+                        isValid = false;
+                    }
+                    if (password.value.trim().length < 6) {
+                        showError(password, 'Пароль должен быть длиной не менее 6 символов.');
+                        isValid = false;
+                    }
+
+                    if (isValid) {
+                        document.getElementById('registerForm').submit();
+                    }
+                }
+
+                // Отображение ошибки
+                function showError(input, message) {
+                    const error = input.nextElementSibling;
+                    input.classList.add('error-border');
+                    error.textContent = message;
+                    error.style.display = 'block';
+                }
+
+                // Привязка обработчиков
+                document.getElementById('loginForm').addEventListener('submit', validateLoginForm);
+                document.getElementById('registerForm').addEventListener('submit', validateRegisterForm);
+            </script>
+
+
+        </div>
+    </div>
+    <div class="poisk2"></div>
+    <div class="corpus">
+        <div>
+            <div style="float:right; width:690px;">
+                <div class="organic" style="padding-left: 10px;">
+                    <h1 itemprop="name">
+                        <div class="inwfo">
+                            ОНЛАЙН МУЛЬТФИЛЬМЫ
+                            <br>
+                            бесплатно в хорошем качестве
+                            <br>
+                            НОВЫЕ СЕРИИ
+                        </div>
+                    </h1>
+                    <div class="tit" itemprop="alternativeHeadline">
+                        Только у нас собраны практически все мультфильмы
+                        <br>
+                        с русской озвучкой и субтитрами
+                    </div>
+                    <div class="livetable__match__head boxing">
+                        <div class="livetable__match__head__contain">
+                            <h2>
+                                <span class="tvtext353">МУЛЬТФИЛЬМЫ</span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="livetable__status2">
+                        Обновления&nbsp;&nbsp;•&nbsp;&nbsp;Новинки&nbsp;&nbsp;•&nbsp;&nbsp;Премьеры
+                    </div>
+                    <p>&nbsp;</p>
+                    <p></p>
+                    <div class="cartoons-container"></div>
+                    <!--<div class="indicator">
+                        <div class="live_contain">
+                            <div class="live_premiere2">Премьера</div>
+                            <a href="">
+                                <span class="live_image">
+                                    <img src="{imagepath}" alt="{titlerus}">
+                                </span>
+                                <span class="live_namerus">{titlerus}</span>
+                                <br>
+                                <span class="live_nameeng">{titleeng}</span>
+                                <br>
+                                <span class="live_series">{type}</span>
+                                <div class="live_sound2">{sound}</div>
+                            </a>
+                        </div>
+                    </div>-->
+                    <p></p>
+                    <div style="clear:both;"></div>
+                    <span class="title_h2">
+                        <div class="movie_video"></div>
+                    </span>
+                    <br>
+                    <p>
+                        <br><br><br>
+                    </p>
+                </div>
+            </div>
+            <div class="lm">
+                <div class="lm">
+                    <ul class="menubox">
+                        <li><a href="https://looktoon.lol/animation/walt_disney.html" title="Мультфильмы Диснея">Дисней</a><div class="label02" data-src="images/label02.webp"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/animation/pixar.html" title="Мультфильмы студии Пиксар">студия Пиксар</a><div class="label03"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/animation/dreamworks.html" title="Мультфильмы студии DreamWorks">DreamWorks</a><div class="label05"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/animation/blue_sky.html" title="Мультфильмы студии Blue Sky">студия Blue Sky</a><div class="label06"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/animation/sony_pictures_animation.html" title="Мультфильмы студии Sony Pictures Animation">студия Sony<br> Pictures Animation</a><div class="label13"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/adult_swim.html" title="Мультфильмы adult swim">[ adult swim ]</a><div class="label01"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/grown_up_cartoons.html" title="Мультфильмы для взрослых">Мультфильмы<br>для взрослых</a><div class="label07"></div></li>
+                        <li><a href="https://looktoon.lol/cartoon_family.html" title="Мультфильмы для всей семьи">Мультфильмы<br>для всей семьи</a><div class="label10"></div></li>
+                        <li><a href="https://looktoon.lol/feature_cartoons.html" title="Мультфильмы для детей">Мультфильмы<br>для детей</a><div class="label11"></div></li>
+                        <li><a href="https://looktoon.lol/for_the_little_ones.html" title="Мультфильмы для самых маленьких">для самых<br>маленьких</a><div class="label12"></div></li>
+                        <br>
+                        <li><a href="https://looktoon.lol/kids_movies.html" title="Детские фильмы">Детские фильмы</a><div class="label09"></div></li>
+                    </ul>
+                    <div aline="center">
+                        <a href="https://looktoon.lol/top_mult.html">
+                            <img src="looktoonKungFu/images/cartoontop.webp" alt="ТОП 100 МУЛЬТСЕРИАЛОВ" title="ТОП 100 МУЛЬТСЕРИАЛОВ" width="250" height="141">
+                        </a>
+                    </div>
+                    <br>
+                    <div aline="center"></div>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+            <div class="footer">
+                <div class="__bckfoot2"></div>
+                <div class="fasion">
+                    МУЛЬТФИЛЬМЫ ОНЛАЙН&nbsp;&nbsp;•&nbsp;
+                    <a href="mailto:adultmult@gmail.com" style="color:#FF8D6A">ПО ВОПРОСАМ СОТРУДНИЧЕСТВА</a>
+                    <br>
+                    © 2007-2024 adultmult
+                </div>
+                <a href="https://adultmult.club">
+                    <div class="__bckfoot"></div>
+                </a>
+            </div>
+        </div>
+
+</body>
+</html>

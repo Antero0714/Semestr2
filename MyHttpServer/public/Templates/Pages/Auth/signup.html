@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Looktoon</title>
+    <link rel="shortcut icon" href="#" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+                .form-group input.error-border {
+                    border-color: red;
+                    background-color: #ffe6e6;
+                }
+
+            .form-group small.error-message {
+                color: red;
+                font-size: 12px;
+                display: none;
+            }
+
+            .form-group button {
+                width: 100%;
+                padding: 10px;
+                background: #28a745;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .form-group button:hover {
+                    background: #218838;
+                }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h3>Регистрация</h3>
+        <form method="POST" action="/register" id="registrationForm">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Электронная почта" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirmPassword" placeholder="Повторите пароль" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="validateForm()">Зарегистрироваться</button>
+            </div>
+        </form>
+
+        <form method="POST" action="/exit" id="exit">
+            <div class="form-group">
+                <button type="submit" id="exit">Выйти</button>
+            </div>
+        </form>
+
+        <form method="GET" action="/main" id="exit">
+            <div class="form-group">
+                <button type="submit" id="exit">Перейти на главную страницу</button>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            const fields = [
+                {
+                    id: 'username',
+                    validation: value => value.trim() !== '',
+                    error: 'Имя пользователя не должно быть пустым!'
+                },
+                {
+                    id: 'email',
+                    validation: value => emailRegex.test(value.trim()),
+                    error: 'Введите корректную электронную почту!'
+                },
+                {
+                    id: 'password',
+                    validation: value => value.trim() !== '',
+                    error: 'Пароль не должен быть пустым!'
+                },
+                {
+                    id: 'confirmPassword',
+                    validation: value => value.trim() !== '' && value === document.getElementById('password').value,
+                    error: 'Пароли должны совпадать!'
+                }
+            ];
+
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorMessage = input.nextElementSibling;
+                if (!field.validation(input.value)) {
+                    input.classList.add('error-border');
+                    errorMessage.textContent = field.error;
+                    errorMessage.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('error-border');
+                    errorMessage.style.display = 'none';
+                }
+            });
+
+            if (isValid) {
+                document.getElementById('registrationForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>

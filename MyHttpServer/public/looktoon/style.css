@@ -1,0 +1,811 @@
+/* Кнопка для открытия модального окна */
+.open-modal-btn {
+    display: block;
+    margin: 13px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .open-modal-btn:hover {
+        background-color: #45a049;
+    }
+
+/* Модальное окно */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Полупрозрачный фон */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+}
+
+    /* Отображение модального окна */
+    .modal.show {
+        display: flex; /* Устанавливаем flex для центрирования */
+    }
+
+/* Контент модального окна */
+.modal-content {
+    left: 37%;
+    top: 10%;
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+    /* Поля ввода */
+    .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    /* Кнопки */
+    .modal-content button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        .modal-content button:hover {
+            background-color: #45a049;
+        }
+
+/* Кнопка отмены */
+.cancelbtn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .cancelbtn:hover {
+        background-color: #d32f2f;
+    }
+
+/* Закрывающая кнопка */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+    .close:hover {
+        color: black;
+    }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #1E1F23;
+    background-repeat: repeat;
+    background-position: top center;
+}
+
+    element.style {
+        clear: both;
+    }
+
+    a {
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #527394;
+    }
+
+    a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    p {
+        text-indent: 20px;
+    }
+
+    p {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        unicode-bidi: isolate;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+        unicode-bidi: isolate;
+    }
+
+    h1 {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: #FFF;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+    }   
+
+
+
+    .inwfo h1 {
+        display: block;
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        unicode-bidi: isolate;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 13px;
+        color: #ac8559;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+    }
+
+    h2 {
+        display: block;
+        font-size: 1.5em;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        unicode-bidi: isolate;
+    }
+
+    ul {
+        margin-left: 10px;
+        padding-left: 10px;
+    }
+
+    ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 20px;
+        unicode-bidi: isolate;
+    }
+
+    .lm {
+        float: left;
+        width: 290px;
+        margin-top: 10px;
+    }
+
+    .div {
+        display: block;
+        unicode-bidi: isolate;
+    }
+
+    body, td {
+        color: #959595;
+        font-weight: 700;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-size: 11px;
+    }
+
+    .topmenu {
+        margin: 0 auto;
+        width: 980px;
+        position: relative;
+    }
+
+    .topmenudecor {
+        padding-left: 10px;
+        width: 968px;
+        border: 1px solid #B7AA80;
+        background: #000;
+        overflow: auto;
+        margin-bottom: 5px;
+        display: table;
+    }
+
+    .topmenudecor li {
+        display: block;
+        padding: 0 20px;
+        padding-top: 13px;
+        padding-bottom: 10px;
+        margin: 5px 2px;
+        line-height: 30px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 0.7rem;
+        float: left;
+        text-shadow: #652C4D 2px 2px 2px;
+    }
+
+li.par-cartoon {
+    overflow: hidden;
+    background: #417A51 url(images/menulogo1.webp);
+    background-repeat: no-repeat;
+    padding-left: 115px;
+    text-decoration: none;
+    border: 1px solid #B7AA80;
+}
+
+    li.par-anime {
+        overflow: hidden;
+        background: #003658 url(images/menulogo2.webp);
+        background-repeat: no-repeat;
+        padding-left: 115px;
+        text-decoration: none;
+        border: 1px solid #B7AA80;
+    }
+
+    li.par-tv {
+        overflow: hidden;
+        background: #5C5461 url(images/menulogo3.webp);
+        background-repeat: no-repeat;
+        padding-left: 95px;
+        text-decoration: none;
+        border: 1px solid #B7AA80;
+    }
+
+.subtg {
+    margin: 0px 5px 0px -10px;
+    margin-top: 11px;
+    position: relative;
+    float: right;
+    background: url(images/tgicon.webp) no-repeat center;
+    display: block;
+    width: 44px;
+    height: 42px !important;
+    text-align: center;
+    line-height: 42px;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+
+    .topmenudecor li:hover {
+    text-shadow: 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black, -1px -1px 0 black;
+    color: #E46329;
+    }
+
+    .subvk {
+        margin: 0px 5px 0px 10px;
+        margin-top: 11px;
+        position: relative;
+        float: right;
+        background: url(images/login.png);
+        display: block;
+        width: 43px;
+        height: 42px !important;
+    }
+
+    .poisk2 {
+        margin: 0 auto;
+        width: 978px;
+        border: 1px solid #B7AA80;
+        background: #200A2C;
+        overflow: auto;
+        margin-bottom: 5px;
+        display: table;
+    }
+
+    .organic {
+        overflow: hidden;
+        border-top: 1px solid #571C1F;
+        border-left: 1px solid #B7AA80;
+        position: relative;
+        background: #161C20;
+        text-align: center;
+        box-shadow: 0px 0px 25px 0px #000;
+    }
+
+    .tit {
+        font-size: 16px;
+        color: #FFAB59;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        /* padding-bottom: 15px; */
+        margin-top: -10px;
+    }
+
+    .livetable__match__head {
+        margin-right: 16px;
+        overflow: hidden;
+    }
+
+    .livetable__match__head__contain {
+        color: #eb6a3e;
+        display: inline-block;
+        font: 16px / 16px 'PT Sans', Arial;
+        font-weight: 700;
+        padding: 0 10px 0px;
+        position: relative;
+        text-transform: uppercase;
+        margin-top: 20px;
+    }
+
+    .livetable__match__head.boxing .livetable__match__head__contain:before, .livetable__match__head.boxing .livetable__match__head__contain:after {
+        background-color: #852121;
+    }
+
+    .livetable__match__head__contain:before, .livetable__match__head__contain:after {
+        content: '';
+        background-color: #852121;
+        display: inline-block;
+        width: 300px;
+        height: 2px;
+        position: absolute;
+        right: 100%;
+        top: 50%;
+    }
+
+    .livetable__match__head__contain:after {
+        right: auto;
+        left: 100%;
+        margin-top: 5px;
+    }
+
+    .livetable__match__head__contain::before {
+        right: auto;
+        right: 100%;
+        margin-top: 5px;
+    }
+
+    .tvtext353 {
+        color: #eb6a3e;
+        font: 16px / 16px 'PT Sans', Arial;
+        font-weight: 700;
+    }
+
+
+    .livetable__status2 {
+        color: #8e979f;
+        font: 12px / 14px 'PT Sans', Arial;
+        margin-bottom: 5px;
+        margin-top: -20px;
+        min-height: 7px;
+    }
+
+    .corpus {
+        margin: 0 auto;
+        width: 980px;
+        position: relative;
+        border: 1px solid #B7AA80;
+        overflow: hidden;
+        background: #000 repeat-y;
+    }
+
+    .indicator {
+        border: solid 1px #545f68;
+        box-sizing: border-box;
+        padding: 4px;
+        width: 670px;
+        margin-bottom: -12px;
+    }
+
+    .live_contain {
+        box-sizing: border-box;
+        text-align: left;
+        padding: 0px 0 5px;
+        background: #3d4246;
+        height: 65px;
+    }
+
+    .live_premiere {
+        position: relative;
+        margin-top: 20px;
+        margin-right: 5px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #BA3F03;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+
+    .live_premiere2 {
+        position: relative;
+        margin-top: 1.2%;
+        margin-right: 5px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #BA3F03;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+
+    .live_series {
+         /*margin-top: 8px;*/   
+        margin-top: px;
+        margin-left: 17px;
+        font-size: 12px;
+        color: #959595;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+    }
+
+    .live_image {
+        margin-left: 2px;
+        float: left;
+        width: 210px;
+        height: 60px;
+    }
+
+    .live_namerus {
+        margin-left: 15px;
+        font-size: 15px;
+        color: #E0AF57;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        display: inline-block;
+    }
+
+    .live_nameeng {
+        margin-left: 30px;
+        font-size: 11px;
+        color: #D0D0C0;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+    }
+
+
+
+    .live_sound {
+        position: relative;
+        margin-top: 20px;
+        margin-right: 5px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #4A7473;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+
+    .live_sound1 {
+        position: relative;
+        margin-top: 1.2%;
+        margin-right: 5px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #4A7473;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+    .live_sound2 {
+        position: relative;
+        margin-top: -0.2%;
+        margin-right: 5px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #4A7473;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+
+    .live_sound3 {
+        position: relative;
+        margin-top: 1.2%;
+        margin-right: 3px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #4A7473;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+
+    .live_sound4 {
+        position: relative;
+        margin-top: -0.2%;
+        margin-right: 3px;
+        font-size: 11px;
+        color: #B5D3D3;
+        font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+        display: inline-block;
+        background-color: #4A7473;
+        border-radius: 2px;
+        padding: 2px 6px 3px;
+        float: right;
+    }
+
+    .title_h2 {
+        width: 630px;
+        position: relative;
+        margin-top: 5px;
+        margin-right: 15px;
+        box-shadow: 0 0 0 1px;
+        color: #DDA91F;
+        display: inline-block;
+        background-color: #161C20;
+        border-radius: 1px;
+        padding: 0px 15px 0px;
+        float: center;
+    }
+
+
+    .menubox {
+        list-style: none;
+        width: 250px;
+        text-align: right;
+    }
+
+
+    .menubox li {
+        margin-top: 15px;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 22px;
+        color: #E2CCA5;
+    }
+
+    .menubox li a {
+        
+        display: block;
+        padding: 4px 15px;
+        background: #321E2A;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-size: 13px;
+        color: #F1A154;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: #652C4D 2px 2px 2px;
+        text-decoration: none;
+        border: 1px solid #B7AA80;
+        padding: 0.7rem;
+        position: relative;
+    }
+        
+    .label02 {
+        float: left;
+        background: url(images/label02.webp);
+        width: 80px;
+        height: 55px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 10px;
+        margin-top: -55px;
+    }
+
+    .label03 {
+        float: left;
+        background: url(images/label03.webp);
+        width: 97px;
+        height: 60px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 0px;
+        margin-top: -60px;
+    }
+
+    .label05 {
+        float: left;
+        background: url(images/label05.webp);
+        width: 130px;
+        height: 35px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 0px;
+        margin-top: -31px;
+    }
+
+    .label06 {
+        float: left;
+        background: url(images/label06.webp);
+        width: 92px;
+        height: 60px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: -5px;
+        margin-top: -60px;
+    }
+
+    .label13 {
+        float: left;
+        background: url(images/label13.webp);
+        width: 104px;
+        height: 60px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: -10px;
+        margin-top: -60px;
+    }
+
+    .label01 {
+        float: left;
+        background: url(images/label01.webp);
+        width: 66px;
+        height: 60px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 15px;
+        margin-top: -60px;
+    }
+
+    .label07 {
+        float: left;
+        background: url(images/label07.webp);
+        width: 120px;
+        height: 66px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: -15px;
+        margin-top: -66px;
+    }
+
+    .label09 {
+        float: left;
+        background: url(images/label09.webp);
+        width: 94px;
+        height: 63px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 0px;
+        margin-top: -63px;
+    }
+
+
+
+.label10 {
+    background: url(images/label10.webp);
+    float: left;
+    width: 69px;
+    height: 65px;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: 10px;
+    margin-top: -65px;
+}
+
+    .label11 {
+        float: left;
+        background: url(images/label11.webp);
+        width: 109px;
+        height: 50px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: -5px;
+        margin-top: -50px;
+    }
+
+    .label12 {
+        float: left;
+        background: url(images/label12.webp);
+        width: 82px;
+        height: 63px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 10px;
+        margin-top: -63px;
+    }
+
+    .footer {
+        border-top: 1px solid #B7AA80;
+        border-bottom: 2px solid #B7AA80;
+        background-color: #1C0927;
+        overflow: hidden;
+        height: 48px;
+    }
+
+    .__bckfoot {
+        float: right;
+        background: url(images/__bckfoot2.png);
+        width: 154px;
+        height: 48px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-right: 30px;
+    }
+
+    .__bckfoot2 {
+        float: left;
+        background: url(images/__bckfoot.png);
+        width: 92px;
+        height: 48px;
+        background-repeat: no-repeat;
+        position: relative;
+        margin-left: 30px;
+        margin-top: 0px;
+    }
+
+    .fasion {
+        float: left;
+        margin-left: 13%;
+        padding-left: 55px;
+        padding-top: 9px;
+        color: #F3E5B1;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    #breadcrumbs a {
+        color: #E2D7C0;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        text-decoration: none;
+        font-size: 11px;
+        display: inline-block;
+        border-bottom: 1px solid rgba(145, 148, 156, .3);
+    }
+
+    .par-cartoon {
+
+    }
+
+    .par-anime {
+
+    }
+
+    .par-tv {
+
+    }
+
+    .subtg {
+
+    }
+
+    .tg_headerBlock {
+
+    }
+
+    .subvk {
+
+    }
