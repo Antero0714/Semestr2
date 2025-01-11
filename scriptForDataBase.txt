@@ -1,0 +1,44 @@
+CREATE TABLE [dbo].[Comments] (
+    [Id]          INT            IDENTITY (1, 1) NOT NULL,
+    [FilmId]      INT            NOT NULL,
+    [UserId]      NVARCHAR (255) NOT NULL,
+    [CommentText] NVARCHAR (MAX) NOT NULL,
+    [CreatedAt]   DATETIME       DEFAULT (getdate()) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([FilmId]) REFERENCES [dbo].[Users] ([Id])
+);
+
+CREATE TABLE [dbo].[TemplateFilm] (
+    [Id]           INT            NOT NULL,
+    [Photo]        NVARCHAR (500) NOT NULL,
+    [Date]         NVARCHAR (50)  NOT NULL,
+    [Country]      NVARCHAR (100) NOT NULL,
+    [Genre]        NVARCHAR (255) NOT NULL,
+    [Duration]     NVARCHAR (50)  NOT NULL,
+    [Description]  NVARCHAR (MAX) NOT NULL,
+    [LinkToPlayer] NVARCHAR (500) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[TUserDash] (
+    [Id]       INT            IDENTITY (1, 1) NOT NULL,
+    [Name]     NVARCHAR (100) NOT NULL,
+    [Password] NVARCHAR (255) NOT NULL,
+    [Email]    NVARCHAR (255) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Users] (
+    [Id]        INT            IDENTITY (1, 1) NOT NULL,
+    [TitleRus]  NVARCHAR (255) NOT NULL,
+    [TitleEng]  NVARCHAR (255) NOT NULL,
+    [Type]      NVARCHAR (100) NOT NULL,
+    [Sound]     NVARCHAR (100) NOT NULL,
+    [ImagePath] NVARCHAR (500) NOT NULL,
+    [Link]      NVARCHAR (500) NOT NULL,
+    [Year]      NVARCHAR (50)  NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
