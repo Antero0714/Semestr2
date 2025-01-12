@@ -13,7 +13,7 @@ namespace MyHttpServer.Endpoints
     class CommentEndpoints : EndpointBase
     {
         [Post("film/comment")]
-        public IHttpResponseResult AddComment(string commentText)
+        public IHttpResponseResult AddComment(string commentText, int filmId)
         {
             try
             {
@@ -36,10 +36,13 @@ namespace MyHttpServer.Endpoints
                     sqlConnection.Open();
 
                     // SQL-запрос для добавления комментария
-                    string query = $"INSERT INTO Comments (FilmId, UserId, CommentText, CreatedAt) VALUES (2072, @UserId, @CommentText, GETDATE())";
+                    string query = @"
+                INSERT INTO Comments (FilmId, UserId, CommentText, CreatedAt)
+                VALUES (@FilmId, @UserId, @CommentText, GETDATE())";
 
                     using (var command = new SqlCommand(query, sqlConnection))
                     {
+                        command.Parameters.AddWithValue("@FilmId", filmId);
                         command.Parameters.AddWithValue("@UserId", userId);
                         command.Parameters.AddWithValue("@CommentText", commentText);
 
@@ -55,6 +58,7 @@ namespace MyHttpServer.Endpoints
                 return Json(new { success = false, message = "Ошибка при добавлении комментария." });
             }
         }
+
 
 
     }

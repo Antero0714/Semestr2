@@ -2893,3 +2893,14 @@ li.ven33{float:right;position:relative;margin-top:-41px;margin-right:58.5%; back
 }
 
 
+.open-modal-btn {
+    display: block;
+    margin: 13px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

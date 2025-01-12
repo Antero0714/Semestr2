@@ -1,0 +1,22 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  myhttpserver:
+    build:
+      context: "C:\\Users\\andre\\Desktop\\Semestrovka"
+      dockerfile: "MyHttpServer/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/MyHttpServer.dll"
+    environment:
+      DOTNET_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "myhttpserver:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\andre\\Desktop\\Semestrovka\\MyHttpServer:/app:rw"
+    - "C:\\Users\\andre\\Desktop\\Semestrovka:/src:rw"
+    - "C:\\Users\\andre\\AppData\\Roaming\\Microsoft\\UserSecrets:/home/app/.microsoft/usersecrets"
+    - "C:\\Users\\andre\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"

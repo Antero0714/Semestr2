@@ -30,14 +30,10 @@
                     Сериалы
                 </li>
             </a>
-            <a href="https://t.me/joinchat/sgL69vsdIbkyMTQy" target="_blank">
-                <span class="subtg">
-                </span>
-            </a>
-            <a class="tg_headerBlock" href="https://vk.com/adultmult_ru" target="_blank">
-                <span class="subvk">
-                </span>
-            </a>
+            <button class="open-modal-btn" onclick="window.location.href='/ENTRY';">
+                {{EntryOrName}}
+            </button>
+            {{CheckControl}}
         </div>
     </div>
     <div class="poisk2">
@@ -255,7 +251,7 @@
                                                     <div class="mc-text-cnt">
                                                         <div class="mc-text-wrap">
                                                             <div class="mc-textarea-wrap">
-                                                                <form id="commentForm" method="POST" action="/film/comment?filmId=2072">
+                                                                <form id="commentForm" method="POST" action="/film/comment?Id=2072">
                                                                     <textarea id="commentBox"
                                                                               name="commentText"
                                                                               class="mc-textarea"

@@ -10,7 +10,7 @@ using TemplateEngine;
 
 namespace MyHttpServer.Endpoints
 {
-    internal class SendEmailEndpoint : EndpointBase
+    internal class MainEndpoints : EndpointBase
     {
 
         /*[Post("main")]
@@ -85,6 +85,7 @@ namespace MyHttpServer.Endpoints
             }
             // Заменяем {{EntryOrName}} на имя пользователя
             template = template.Replace("{{EntryOrName}}", username);
+
             if (IsAuthorized(Context))
             {
                 template = template.Replace("{{CheckControl}}", "<button class=\"open-modal-btn\" onclick=\"window.location.href='/control';\">\r\n                Панель управления\r\n            </button>");
@@ -92,10 +93,11 @@ namespace MyHttpServer.Endpoints
             else
             {
                 template = template.Replace("{{CheckControl}}", "");
-
             }
+
             // Получаем мультфильмы
             var cartoons = GetCartoons();
+
             // Генерируем HTML для мультфильмов
             var cartoonsHtml = "";
             foreach (var cartoon in cartoons)
@@ -121,16 +123,58 @@ namespace MyHttpServer.Endpoints
     <p></p>";
             }
 
+            // Получаем категории мультфильмов
+            var categories = GetAnimationCategories();
 
-            // Вставляем мультфильмы в шаблон
+            // Генерируем HTML для категорий
+            var categoriesHtml = "";
+            foreach (var category in categories)
+            {
+                categoriesHtml += $@"
+    <li>
+        <a href='{category.Link}' title='{category.Description}'>
+            {category.Name}
+        </a>
+        <div class='{category.Label}'></div>
+    </li>
+    <br>";
+            }
+
+            // Вставляем мультфильмы и категории в шаблон
             var engine = new HtmlTemplateEngine();
-            var finalHtml = engine.RenderToClass<Film>(template, "cartoons-container", cartoonsHtml);
+            template = engine.RenderToClass<Film>(template, "cartoons-container", cartoonsHtml);
+            var finalHtml = engine.RenderToClass<Category>(template, "menubox", categoriesHtml);
 
             return Html(finalHtml);
         }
 
+        private List<Category> GetAnimationCategories()
+        {
+            using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+            {
+                sqlConnection.Open();
 
-
+                string query = "SELECT Name, Description, Link, Label FROM AnimationCategories";
+                using (var command = new SqlCommand(query, sqlConnection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var categories = new List<Category>();
+                        while (reader.Read())
+                        {
+                            categories.Add(new Category
+                            {
+                                Name = reader["Name"].ToString(),
+                                Description = reader["Description"].ToString(),
+                                Link = reader["Link"].ToString(),
+                                Label = reader["Label"].ToString()
+                            });
+                        }
+                        return categories;
+                    }
+                }
+            }
+        }
 
         static public List<Film> GetCartoons()
         {

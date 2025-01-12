@@ -15,12 +15,13 @@ namespace TemplateEngine
 
         public string RenderToClass<T>(string html, string className, string content)
         {
-            // Ищем элемент с указанным классом
-            var pattern = $"<div class=\"{className}\">(.*?)</div>";
-            var replacement = $"<div class=\"{className}\">{content}</div>";
+            // Ищем элемент с указанным классом, независимо от тега
+            var pattern = $"<(?<tag>[a-zA-Z]+) class=\"{className}\"[^>]*>(.*?)</\\k<tag>>";
+            var replacement = $"<${{tag}} class=\"{className}\">{content}</${{tag}}>";
 
             return Regex.Replace(html, pattern, replacement, RegexOptions.Singleline);
         }
+
 
         public string LoadTemplate(string filePath)
         {

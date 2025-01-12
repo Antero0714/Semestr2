@@ -26,7 +26,7 @@ internal class TemplateFilmEndpoints : EndpointBase
         {
             return Html("<h1>Film doesn't exist</h1>");
         }
-   // C: \Users\andre\Desktop\Semestrovka\MyHttpServer\public\looktoonKungFu\TemplateHtml.html
+        // C: \Users\andre\Desktop\Semestrovka\MyHttpServer\public\looktoonKungFu\TemplateHtml.html
         // Загружаем HTML-шаблон
         string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "looktoonKungFu", "TemplateHtml.html");
         string template = File.ReadAllText(templatePath);
@@ -42,9 +42,59 @@ internal class TemplateFilmEndpoints : EndpointBase
             .Replace("{{Genre}}", filmDetails.Genre)
             .Replace("{{Duration}}", filmDetails.Duration)
             .Replace("{{Description}}", filmDetails.Description)
-            .Replace("{{LinkToPlayer}}", filmDetails.LinkToPlayer);
+            .Replace("{{LinkToPlayer}}", filmDetails.LinkToPlayer)
+            ;
+
+        // Получаем токен из куки
+        var tokenCookie = Context.Request.Cookies.FirstOrDefault(c => c.Name == "session-token");
+        string username = "Вход"; // Значение по умолчанию
+
+        if (tokenCookie != null)
+        {
+            // Проверяем токен и извлекаем имя пользователя
+            var token = tokenCookie.Value;
+            username = SessionStorage.GetUserNameByToken(token) ?? "Вход";
+        }
+        // Заменяем {{EntryOrName}} на имя пользователя
+        renderedHtml = renderedHtml.Replace("{{EntryOrName}}", username);
+        if (IsAuthorized(Context))
+        {
+            renderedHtml = renderedHtml.Replace("{{CheckControl}}", "<button class=\"open-modal-btn\" onclick=\"window.location.href='/control';\">\r\n                Панель управления\r\n            </button>");
+        }
+        else
+        {
+            renderedHtml = renderedHtml.Replace("{{CheckControl}}", "");
+
+        }
+
 
         return Html(renderedHtml);
     }
 
+    private bool IsAuthorized(HttpRequestContext context)
+    {
+        string userName = null;
+
+        if (context.Request.Cookies.Any(c => c.Name == "session-token"))
+        {
+            var cookie = context.Request.Cookies["session-token"];
+            Console.WriteLine($"Cookie Value: {cookie.Value}");
+
+            // Проверяем токен через SessionStorage
+            if (SessionStorage.ValidateToken(cookie.Value))
+            {
+                userName = SessionStorage.GetUserNameByToken(cookie.Value); // Получаем имя пользователя по токену
+                Console.WriteLine($"User Name: {userName}");
+                return true;
+            }
+
+            Console.WriteLine("Invalid session-token.");
+        }
+        else
+        {
+            Console.WriteLine("No session-token cookie found.");
+        }
+
+        return false;
+    }
 }

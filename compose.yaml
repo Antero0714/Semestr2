@@ -1,0 +1,6 @@
+﻿services:
+  myhttpserver:
+    image: myhttpserver
+    build:
+      context: .
+      dockerfile: MyHttpServer/Dockerfile
