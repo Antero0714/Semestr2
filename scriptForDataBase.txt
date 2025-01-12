@@ -1,0 +1,115 @@
+-- P.S. также есть dockerfile скрипт
+
+-- Зарегистрированные пользователи
+CREATE TABLE [dbo].[TUserDash] (
+    [Id]       INT            IDENTITY (1, 1) NOT NULL,
+    [Name]     NVARCHAR (100) NOT NULL,
+    [Password] NVARCHAR (255) NOT NULL,
+    [Email]    NVARCHAR (255) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+-- фильмы (main page)
+CREATE TABLE [dbo].[Users] (
+    [Id]        INT            IDENTITY (1, 1) NOT NULL,
+    [TitleRus]  NVARCHAR (255) NOT NULL,
+    [TitleEng]  NVARCHAR (255) NOT NULL,
+    [Type]      NVARCHAR (100) NOT NULL,
+    [Sound]     NVARCHAR (100) NOT NULL,
+    [ImagePath] NVARCHAR (500) NOT NULL,
+    [Link]      NVARCHAR (500) NOT NULL,
+    [Year]      NVARCHAR (50)  NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+-- информация о фильмах
+CREATE TABLE [dbo].[TemplateFilm] (
+    [Id]           INT            NOT NULL,
+    [Photo]        NVARCHAR (500) NOT NULL,
+    [Date]         NVARCHAR (50)  NOT NULL,
+    [Country]      NVARCHAR (100) NOT NULL,
+    [Genre]        NVARCHAR (255) NOT NULL,
+    [Duration]     NVARCHAR (50)  NOT NULL,
+    [Description]  NVARCHAR (MAX) NOT NULL,
+    [LinkToPlayer] NVARCHAR (500) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+-- каталог на главной страницы (слева)
+CREATE TABLE AnimationCategories (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,       
+    Description NVARCHAR(255) NULL,     
+    Link NVARCHAR(500) NOT NULL,        
+    Label NVARCHAR(255) NULL           
+);
+
+
+
+SET IDENTITY_INSERT [dbo].[TUserDash] ON
+INSERT INTO [dbo].[TUserDash] ([Id], [Name], [Password], [Email]) VALUES (1, N'Andr', N'123', N'andrey@mail.ru')
+INSERT INTO [dbo].[TUserDash] ([Id], [Name], [Password], [Email]) VALUES (5, N'A', N'123', N'a@mail.ru')
+INSERT INTO [dbo].[TUserDash] ([Id], [Name], [Password], [Email]) VALUES (1007, N'krot', N'123', N'krot@mail.ru')
+SET IDENTITY_INSERT [dbo].[TUserDash] OFF
+
+
+
+SET IDENTITY_INSERT [dbo].[Users] ON
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2072, N'Цыплёнок для Линды!', N'Chicken for Linda!', N'Сериал', N'HDRezka', N'looktoon\imgscreen\ChickenforLinda.jpg', N'1', N'2011')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2074, N'Течение', N'Flow', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\Flow.jpg', N'1', N'2020')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2075, N'Неуязвимая рестлерша', N'Invincible Fight Girl', N'Все сезоны', N'Субтитры', N'looktoon\imgscreen\InvincibleFightGirl.jpg', N'1', N'2021')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2078, N'Адский босс', N'Helluva Boss', N'Финал сезона', N'TVShows', N'looktoon\imgscreen\HelluvaBoss.jpg', N'1', N'2011')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2079, N'Закусочная Боба', N'Bob''s burgers', N'Премьера', N'HDRezka', N'looktoon\imgscreen\Bobs_Burgers.jpg', N'1', N'2011')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2082, N'Том и Джери', N'Tom and Jerry', N'Сериал', N'Дубляж/Субтитры', N'looktoon\imgscreen\TomAndJerry.jpg', N'1', N'2021')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2083, N'Воспоминания', N'Memoir', N'Полнометражный фильм', N'HDRezka', N'looktoon\imgscreen\Memoir.jpg', N'1', N'2019')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2084, N'Обычные парни', N'Basic Guys', N'Сериал', N'TVShows', N'looktoon\imgscreen\UniversalBasicGuys.jpg', N'1', N'2015')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2085, N'Киллер Севен', N'Scissor Seven', N'Сериал', N'TVShows', N'looktoon\imgscreen\ScissorSeven.jpg', N'1', N'2021')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2086, N'Симпсоны', N'The Simpsons', N'Сериал', N'Дубляж/Субтитры', N'looktoon\imgscreen\TheSimpsons.jpg', N'1', N'1989')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2087, N'Американский папаша!', N'AmericanDad!', N'Сериал', N'TVShows', N'looktoon\imgscreen\AmericanDad.jpg', N'1', N'2005')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2088, N'Кот-призрак Андзу', N'Ghost Cat Anzu', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\GhostCatAnzu.jpg', N'1', N'2021')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2089, N'Крапополис', N'Krapopolis', N'Сериал', N'TVShows', N'looktoon\imgscreen\Krapopolis.jpg', N'1', N'2021')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2090, N'Кунг-фу панда', N'KungFu Panda', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\KungFuPanda.jpg', N'1', N'2008')
+INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2092, N'Принц-дракон', N'The Dragon Prince', N'Сериал', N'Субтитры', N'looktoon\imgscreen\TheDragonPrince.jpg', N'1', N'2005')
+SET IDENTITY_INSERT [dbo].[Users] OFF
+
+
+
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2072, N'looktoon\Posters\tom.png', N'12.08.2004', N'США', N'Приключение', N'1:38:04', N'Прекрасный современный полнометражный мультфильм, который точно увлечет детей разных возрастов и полов. Да что уж говорить, даже взрослые зрители с удовольствием окунуться в атмосферу мультика.
+
+Главным героем здесь становится большая и неповоротливая панда по имени По. Вс. Жизнь наш новый друг мечтал о славе в сфере боевых искусств, но, как это часто бывает, жизнь его была очень далека от исполнения мечты. Да и сам медведь был мало похож на воина или хотя бы на ученика воина, ведь все знают, какие панды неуклюжие и толстые. Поэтому все, что оставалось нашему герою – это продавать лапшу и лелеять свою мечту.
+
+Но однажды великий мастер по имени Угвей выбирает Воина Дракона, который должен обрести невероятную силу и мощь и победить силы зла. Все ученики мастера, долго и упорно тренировавшиеся, находятся в предвкушении того, что учитель назовет его имя, а он выбирает…нашего героя!
+
+Теперь По предстоит осуществить свою мечту и в совершенстве освоить боевые искусства. Сложности добавляет и то, что обиженные ученики готовы сделать все, чтобы По стало морально невыносимо и он отказался от этой затеи. Но ', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2074, N'looktoon\Posters\bobs.png', N'2020-09-18', N'США', N'Драма', N'1:41:00', N'Фильм рассказывает историю о женщине, которая сталкивается с мистическими событиями после переезда в новый дом.', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2075, N'looktoon\Posters\Flow.png', N'2019-07-12', N'Япония', N'Комедия', N'1:52:00', N'История о девушке, стремящейся стать профессиональной рестлершей, преодолевая трудности и стереотипы', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2078, N'looktoon\Posters\Hell.png', N'2019-10-25', N'США', N'Анимация', N'1:11:00', N'Анимационный сериал о демоне, управляющем отелем в аду для реабилитации грешников', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2079, N'looktoon\Posters\Invincible.png', N'2011-01-09', N'США', N'Триллер', N'0:22:00', N'Сериал о семье Белчер, управляющей закусочной и сталкивающейся с различными приключениями', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2082, N'looktoon\Posters\killer.png', N'2021-02-26', N'США', N'Комедия', N'1:41:00', N'Новые приключения Тома и Джерри в современном мире, где они попадают в роскошный отель', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2083, N'looktoon\Posters\simps.png', N'2021-08-20', N'США', N'Анимация', N'1:56:00', N'Детектив расследует таинственные события, связанные с воспоминаниями и технологиями их извлечения', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2084, N'looktoon\Posters\Linda.png', N'2020-11-13', N'США', N'Фэнтези', N'1:30:00', N'История о двух друзьях, пытающихся найти своё место в мире, сталкиваясь с жизненными трудностями', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2085, N'looktoon\Posters\Memory.png', N'2018-04-25', N'Япония', N'Анимация', N'0:13:00', N'Анимационный сериал о киллере по имени Севен, выполняющем различные задания с юмором и экшеном', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2086, N'looktoon\Posters\Hell.png', N'1989-12-17', N'США', N'Анимация', N'1:22:00', N'Долгоживущий анимационный сериал о семье Симпсонов и их жизни в городе Спрингфилд', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2087, N'looktoon\Posters\bobs.png', N'2005-02-06', N'США', N'Комедия', N'0:22:00', N'Сериал о семье Смитов и их приключениях, включая отца-агента ЦРУ и говорящую золотую рыбку', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2088, N'looktoon\Posters\Hell.png', N'2022-04-15', N'Япония', N'Анимация', N'0:24:00', N'Аниме о коте-призраке по имени Андзу, помогающем людям решать их проблемы', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2089, N'looktoon\Posters\bobs.png', N'2022-09-25', N'США', N'Анимация', N'0:22:00', N'Анимационный сериал, действие которого происходит в мифическом древнегреческом городе Крапополис', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2090, N'looktoon\Posters\simps.png', N'2008-06-06', N'США', N'Приключение', N'1:32:00', N'История о неуклюжей панде По, стремящейся стать мастером кунг-фу и спасти долину от злодея', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
+INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2092, N'looktoon\Posters\Hell.png', N'2018-11-22', N'США', N'Анимация', N'0:27:00', N'Анимационный сериал о приключениях принца-дракона и его друзей в волшебном мире', N'https://www.example.com/film/2092')
+
+
+
+SET IDENTITY_INSERT [dbo].[AnimationCategories] ON
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (1, N'Дисней', N'Мультфильмы Диснея', N'https://looktoon.lol/animation/walt_disney.html', N'label02')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (2, N'Студия Пиксар', N'Мультфильмы студии Пиксар', N'https://looktoon.lol/animation/pixar.html', N'label03')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (3, N'DreamWorks', N'Мультфильмы студии DreamWorks', N'https://looktoon.lol/animation/dreamworks.html', N'label05')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (4, N'студия Blue Sky', N'Мультфильмы студии Blue Sky', N'https://looktoon.lol/animation/blue_sky.html', N'label06')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (5, N'студия Sony <br> Pictures Animation', N'Мультфильмы студии Sony Pictures Animation', N'https://looktoon.lol/animation/sony_pictures_animation.html', N'label13')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (6, N'[ adult swim ]', N'Мультфильмы adult swim', N'https://looktoon.lol/adult_swim.html', N'label01')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (7, N'Мультфильмы <br> для взрослых', N'Мультфильмы для взрослых', N'https://looktoon.lol/grown_up_cartoons.html', N'label07')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (8, N'Мультфильмы  <br> для всей семьи', N'Мультфильмы для всей семьи', N'https://looktoon.lol/cartoon_family.html', N'label10')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (9, N'Мультфильмы <br> для детей', N'Мультфильмы для детей', N'https://looktoon.lol/feature_cartoons.html', N'label11')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (10, N'Для самых <br> маленьких', N'Мультфильмы для самых маленьких', N'https://looktoon.lol/for_the_little_ones.html', N'label12')
+INSERT INTO [dbo].[AnimationCategories] ([Id], [Name], [Description], [Link], [Label]) VALUES (11, N'Детские фильмы', N'Детские фильмы', N'https://looktoon.lol/kids_movies.html', N'label09')
+SET IDENTITY_INSERT [dbo].[AnimationCategories] OFF
+
