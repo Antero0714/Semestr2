@@ -8,7 +8,7 @@ using MyORMLibrary;
 namespace MyHttpServer.Endpoints
 {
 
-    internal class UserEndpoit : EndpointBase
+    internal class UserEndpoits : EndpointBase
     {
         [Get("users")]
         public IHttpResponseResult GetUser(string login = null, string password = null)

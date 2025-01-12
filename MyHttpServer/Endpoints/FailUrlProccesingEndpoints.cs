@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyHttpServer.Endpoints
 {
-    class FailUrlProccesing : EndpointBase
+    class FailUrlProccesingEndpoints : EndpointBase
     {
         [Get("*")]
         public IHttpResponseResult HandleNotFound()

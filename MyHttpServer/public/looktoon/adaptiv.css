@@ -1,5 +1,4 @@
 ﻿@media only screen and (max-width: 390px) {
-    /* Основной стиль */
     .open-modal-btn {
         display: block;
         margin: 13px auto;
@@ -12,9 +11,9 @@
         cursor: pointer;
     }
 
-        .open-modal-btn:hover {
-            background-color: #45a049;
-        }
+    .open-modal-btn:hover {
+        background-color: #45a049;
+    }
 
     .modal {
         display: none;

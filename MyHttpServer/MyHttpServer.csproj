@@ -309,9 +309,6 @@
     <None Update="public\looktoonKungFu\images\__bckfoot2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="public\looktoonKungFu\index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="public\looktoonKungFu\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
