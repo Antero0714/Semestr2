@@ -1,5 +1,5 @@
 <h3 align="center"> README - Инструкция по перемещению на сайте (по URL) </h3>
-<h4>([FIGMA](https://www.figma.com/design/27MFM5D4OFnPZgZbwPc4tK/Untitled?node-id=1-1413&t=ab9rq5pXGn4wGg5s-0) - функционал сайта (ТЗ)) </h4>
+<h4>([FIGMA([url](https://www.figma.com/design/27MFM5D4OFnPZgZbwPc4tK/Untitled?node-id=1-1413&t=ab9rq5pXGn4wGg5s-0))] - функционал сайта (ТЗ)) </h4>
 <h4>(ТЗ.docx - О панели управления и сайте) </h4>
 
 Для запуска проекта необходимо открыть распаковать .zip архив данного репозитория и запустить .sln файл. Перед тем, как запустить проект, убедитесь, что host 8888 свободен на вашем ПК. Если нет, то необходимо поменять Ваш хост в файле AppConfig.cs: public uint Port { get; set; } = 8888;
