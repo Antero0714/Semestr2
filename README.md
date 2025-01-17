@@ -1,5 +1,5 @@
 <h3 align="center"> README - Инструкция по перемещению на сайте (по URL) </h3>
-<h4>(FIGMA - функционал сайта (ТЗ)) </h4>
+<h4>(FIGMA - функционал сайта) </h4>
 <h4>(ТЗ.docx - О панели управления и сайте) </h4>
 
 [FIGMA](https://www.figma.com/design/27MFM5D4OFnPZgZbwPc4tK/Untitled?node-id=1-1413&t=ab9rq5pXGn4wGg5s-0/)
