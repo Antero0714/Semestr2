@@ -98,9 +98,7 @@ namespace MyHttpServer.Endpoints
                                  var dashboardPage = File.ReadAllText(@"Templates\Pages\Dashboard\index.html");
                                  dashboardPage = dashboardPage.Replace("{{UserName}}", name);*/
 
-                        Console.WriteLine("ВСЁ ОК С КУКИ");
-
-                        
+                        Console.WriteLine("ВСЁ ОК С КУКИ");  
 
                         return Redirect(@"/main");
 
@@ -175,6 +173,47 @@ namespace MyHttpServer.Endpoints
             string content = File.ReadAllText(filePath);
             content = content.Replace("{{EntryOrName}}", username);
 
+        
+
+            string query = "SELECT Name FROM TUserDash WHERE Name = @Name AND Password = @Password AND Email = @Email";
+
+            using (var command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.AddWithValue("@Name", username);
+                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Email", email);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Получаем имя пользователя
+                        string name = reader["Name"].ToString();
+                        string token = Guid.NewGuid().ToString(); // Генерируем токен
+
+                        // Сохраняем токен и имя пользователя в памяти
+                        SessionStorage.SaveSession(token, name);
+
+                        // Устанавливаем куку с токеном
+                        var cookie = new Cookie("session-token", token)
+                        {
+                            HttpOnly = true,
+                            Secure = false,
+                            Path = "/" // Доступно на всём сайте
+                        };
+                        Context.Response.Cookies.Add(cookie);
+
+                        /*         // Загружаем HTML-шаблон и заменяем плейсхолдер
+                                 var dashboardPage = File.ReadAllText(@"Templates\Pages\Dashboard\index.html");
+                                 dashboardPage = dashboardPage.Replace("{{UserName}}", name);*/
+
+                        Console.WriteLine("ВСЁ ОК С КУКИ");
+
+                        return Redirect(@"/main");
+
+                    }
+                }
+            }
             return Redirect(@"/main");
         }
 

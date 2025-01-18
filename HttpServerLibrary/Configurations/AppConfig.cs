@@ -14,14 +14,18 @@ namespace HttpServerLibrary.Configurations
         public const string FILE_NAME = "config.json";
 
         // Поля для хранения настроек
-        public  string Domain { get; set; } = "localhost";
+        public string Domain { get; set; } = "localhost";
         public uint Port { get; set; } = 8888;
-        public  string StaticDirectoryPath { get; set; } = "public/";
-        // SMTPstatic  настройки
+        public string StaticDirectoryPath { get; set; } = "public/";
+
+        // SMTP настройки
         public string SmtpServer { get; set; } = "smtp.mail.ru";
-        public  int SmtpPort { get; set; } = 587;
-        public  string SmtpUser { get; set; } = "andrey051407@mail.ru";
-        public  string SmtpPassword { get; set; } = "cWj423B54kJm37uM6N2v";
+        public int SmtpPort { get; set; } = 587;
+        public string SmtpUser { get; set; } = "andrey051407@mail.ru";
+        public string SmtpPassword { get; set; } = "cWj423B54kJm37uM6N2v";
+
+        // Строка соединения с базой данных
+        public string ConnectionString { get; set; } = "Server=your_server;Database=your_database;User Id=your_user;Password=your_password;";
 
         // Singleton
         private static AppConfig? _instance;
@@ -57,14 +61,14 @@ namespace HttpServerLibrary.Configurations
         {
             if (File.Exists(FILE_NAME))
             {
-               // try
+                try
                 {
                     var configFile = File.ReadAllText(FILE_NAME);
                     return JsonSerializer.Deserialize<AppConfig>(configFile) ?? new AppConfig();
                 }
-                //catch (Exception ex)
+                catch (Exception ex)
                 {
-               //     Console.WriteLine($"Ошибка при чтении конфигурации: {ex.Message}");
+                    Console.WriteLine($"Ошибка при чтении конфигурации: {ex.Message}");
                 }
             }
             else

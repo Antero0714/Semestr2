@@ -1,5 +1,6 @@
 ﻿using HttpServerLibrary;
 using HttpServerLibrary.Attributes;
+using HttpServerLibrary.Configurations;
 using HttpServerLibrary.HttpResponse;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,9 @@ namespace MyHttpServer.Endpoints
                 }
 
                 // Подключение к БД
-                using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+                string connectionString = AppConfig.Instance.ConnectionString;
+
+                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
                 {
                     sqlConnection.Open();
 

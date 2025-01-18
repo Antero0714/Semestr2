@@ -6,20 +6,21 @@ using MyORMLibrary;
 using System.Data.SqlClient;
 using HttpServerLibrary;
 using System.Reflection.Metadata;
+using HttpServerLibrary.Configurations;
 
 internal class TemplateFilmEndpoints : EndpointBase
 {
     [Get("film")]
     public IHttpResponseResult GetFilmDetails(int id)
     {
-        string connectionString = @"Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd;";
+        string connectionString = AppConfig.Instance.ConnectionString;
 
         using var connection = new SqlConnection(connectionString);
         var ormFilm = new ORMContext<Film>(connection);
         var ormFilms = new ORMContext<TemplateFilm>(connection);
 
         // Получаем данные из таблиц
-        var film = ormFilm.GetById(id, "Users");
+        var film = ormFilm.GetById(id, "Films");
         var filmDetails = ormFilms.GetById(id, "TemplateFilm");
 
         if (film == null || filmDetails == null)

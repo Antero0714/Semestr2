@@ -1,5 +1,6 @@
 ﻿using HttpServerLibrary;
 using HttpServerLibrary.Attributes;
+using HttpServerLibrary.Configurations;
 using HttpServerLibrary.HttpResponse;
 using MyHttpServer.Models;
 using MyORMLibrary;
@@ -27,7 +28,7 @@ namespace MyHttpServer.Endpoints
                 return Html("<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    " +
                     "<meta charset=\"UTF-8\" />\r\n\r\n    " +
                     "<link rel=\"shortcut icon\" href=\"#\" />\r\n  </head>\r\n\r\n  <body>\r\n    " +
-                    "<h1>You don't registed!</h1> <a href=\"http://localhost:8888/main\">Back to the main page.</a></body>\r\n</html>");
+                    "<h1>You don't registed!</h1> <a href=\"/main\">Back to the main page.</a></body>\r\n</html>");
 
             }
 
@@ -45,7 +46,7 @@ namespace MyHttpServer.Endpoints
         {
             var dbConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd");
             var orm = new ORMContext<Film>(dbConnection);
-            var films = orm.GetByAll("Users");
+            var films = orm.GetByAll("Films");
 
             return Json(films);
         }
@@ -55,7 +56,7 @@ namespace MyHttpServer.Endpoints
         {
             var dbConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd");
             var orm = new ORMContext<Film>(dbConnection);
-            var films = orm.GetByAll("Users");
+            var films = orm.GetByAll("Films");
             return Json(films);
         }
 
@@ -68,8 +69,9 @@ namespace MyHttpServer.Endpoints
             try
             {
                 int newFilmId;
+                string connectionString = AppConfig.Instance.ConnectionString;
 
-                using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
                 {
                     sqlConnection.Open();
 
@@ -108,7 +110,9 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+                string connectionString = AppConfig.Instance.ConnectionString;
+
+                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
                 {
                     sqlConnection.Open();
 
@@ -147,7 +151,9 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+                string connectionString = AppConfig.Instance.ConnectionString;
+
+                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
                 {
                     sqlConnection.Open();
 
@@ -159,8 +165,9 @@ namespace MyHttpServer.Endpoints
                         command.ExecuteNonQuery();
                     }
                 }
+               
 
-                using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
                 {
                     sqlConnection.Open();
 
@@ -188,7 +195,9 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                using (var sqlConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd"))
+                string connectionString = AppConfig.Instance.ConnectionString;
+
+                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
                 {
                     sqlConnection.Open();
 
