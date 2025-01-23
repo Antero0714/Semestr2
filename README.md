@@ -1,4 +1,4 @@
-# Semestr2
+# Семестровая работа №1
 
 ## Информация
 
@@ -54,18 +54,8 @@
    - **Пользователь**: `sa`
    - **Пароль**: `your_password` (замените на фактический пароль, указанный в `docker-compose.yml`)
 
-3. Создайте таблицу `users`, выполнив скрипт из файла `dbo.Users.sql`, расположенного в корне репозитория:
+3. Создайте таблицу `users`, выполнив скрипт из файла `dbo.Users.sql`, расположенного в корне репозитория.
 
-   ```sql
-   CREATE TABLE users (
-       id INT PRIMARY KEY IDENTITY(1,1),
-       username NVARCHAR(50) NOT NULL,
-       password_hash NVARCHAR(255) NOT NULL,
-       email NVARCHAR(100) NOT NULL
-   );
-   ```
-
-   Этот скрипт создаст таблицу `users` с полями `id`, `username`, `password_hash` и `email`.
 
 ## Использование
 
