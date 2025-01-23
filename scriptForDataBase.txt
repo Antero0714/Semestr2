@@ -44,7 +44,6 @@ CREATE TABLE AnimationCategories (
 
 
 
-
 SET IDENTITY_INSERT [dbo].[TUserDash] ON;
 INSERT INTO [dbo].[TUserDash] ([Id], [Name], [Password], [Email]) 
 VALUES 
@@ -56,23 +55,6 @@ SET IDENTITY_INSERT [dbo].[TUserDash] OFF;
 
 
 SET IDENTITY_INSERT [dbo].[Films] ON
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2072, N'Цыплёнок для Линды!', N'Chicken for Linda!', N'Сериал', N'HDRezka', N'looktoon\imgscreen\ChickenforLinda.jpg', N'1', N'2011')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2074, N'Течение', N'Flow', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\Flow.jpg', N'1', N'2020')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2075, N'Неуязвимая рестлерша', N'Invincible Fight Girl', N'Все сезоны', N'Субтитры', N'looktoon\imgscreen\InvincibleFightGirl.jpg', N'1', N'2021')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2078, N'Адский босс', N'Helluva Boss', N'Финал сезона', N'TVShows', N'looktoon\imgscreen\HelluvaBoss.jpg', N'1', N'2011')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2079, N'Закусочная Боба', N'Bob''s burgers', N'Премьера', N'HDRezka', N'looktoon\imgscreen\Bobs_Burgers.jpg', N'1', N'2011')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2082, N'Том и Джери', N'Tom and Jerry', N'Сериал', N'Дубляж/Субтитры', N'looktoon\imgscreen\TomAndJerry.jpg', N'1', N'2021')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2083, N'Воспоминания', N'Memoir', N'Полнометражный фильм', N'HDRezka', N'looktoon\imgscreen\Memoir.jpg', N'1', N'2019')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2084, N'Обычные парни', N'Basic Guys', N'Сериал', N'TVShows', N'looktoon\imgscreen\UniversalBasicGuys.jpg', N'1', N'2015')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2085, N'Киллер Севен', N'Scissor Seven', N'Сериал', N'TVShows', N'looktoon\imgscreen\ScissorSeven.jpg', N'1', N'2021')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2086, N'Симпсоны', N'The Simpsons', N'Сериал', N'Дубляж/Субтитры', N'looktoon\imgscreen\TheSimpsons.jpg', N'1', N'1989')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2087, N'Американский папаша!', N'AmericanDad!', N'Сериал', N'TVShows', N'looktoon\imgscreen\AmericanDad.jpg', N'1', N'2005')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2088, N'Кот-призрак Андзу', N'Ghost Cat Anzu', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\GhostCatAnzu.jpg', N'1', N'2021')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2089, N'Крапополис', N'Krapopolis', N'Сериал', N'TVShows', N'looktoon\imgscreen\Krapopolis.jpg', N'1', N'2021')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2090, N'Кунг-фу панда', N'KungFu Panda', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\KungFuPanda.jpg', N'1', N'2008')
-INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2092, N'Принц-дракон', N'The Dragon Prince', N'Сериал', N'Субтитры', N'looktoon\imgscreen\TheDragonPrince.jpg', N'1', N'2005')
-SET IDENTITY_INSERT [dbo].[Films] OFF
-
 INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2072, N'Цыплёнок для Линды!', N'Chicken for Linda!', N'Сериал', N'HDRezka', N'looktoon\imgscreen\ChickenforLinda.jpg', N'1', N'2011')
 INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2074, N'Течение', N'Flow', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\Flow.jpg', N'1', N'2020')
 INSERT INTO [dbo].[Films] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2075, N'Неуязвимая рестлерша', N'Invincible Fight Girl', N'Все сезоны', N'Субтитры', N'looktoon\imgscreen\InvincibleFightGirl.jpg', N'1', N'2021')
@@ -114,6 +96,7 @@ INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Du
 INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2089, N'looktoon\Posters\bobs.png', N'2022-09-25', N'США', N'Анимация', N'0:22:00', N'Анимационный сериал, действие которого происходит в мифическом древнегреческом городе Крапополис', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
 INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2090, N'looktoon\Posters\simps.png', N'2008-06-06', N'США', N'Приключение', N'1:32:00', N'История о неуклюжей панде По, стремящейся стать мастером кунг-фу и спасти долину от злодея', N'//sheldon.newplayjj.com:9443/?kp=103734&amp;token=bc495cb1f27954ba609aa4b619fae5')
 INSERT INTO [dbo].[TemplateFilm] ([Id], [Photo], [Date], [Country], [Genre], [Duration], [Description], [LinkToPlayer]) VALUES (2092, N'looktoon\Posters\Hell.png', N'2018-11-22', N'США', N'Анимация', N'0:27:00', N'Анимационный сериал о приключениях принца-дракона и его друзей в волшебном мире', N'https://www.example.com/film/2092')
+
 
 
 
