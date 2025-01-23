@@ -40,9 +40,9 @@ namespace MyHttpServer.Endpoints
 
             try
             {
-                string connectionString = AppConfig.Instance.ConnectionString;
+                string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
 
-                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+                using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     sqlConnection.Open();
 

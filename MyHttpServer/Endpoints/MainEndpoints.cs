@@ -18,7 +18,7 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                using (var dbConnection = new SqlConnection(@"Data Source=localhost;Initial Catalog=user;User ID=sa;Password=P@ssw0rd;"))
+                using (var dbConnection = SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     var ormContext = new ORMContext<UserReg>(dbConnection);
                     var users = ormContext.GetByAll("usersAvtoriz");
@@ -150,8 +150,8 @@ namespace MyHttpServer.Endpoints
 
         private List<Category> GetAnimationCategories()
         {
-            string connectionString = AppConfig.Instance.ConnectionString;
-            using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+            string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
+            using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
             {
                 sqlConnection.Open();
 
@@ -179,7 +179,7 @@ namespace MyHttpServer.Endpoints
 
         static public List<Film> GetCartoons()
         {
-            using (var connection = new SqlConnection(@"Data Source=localhost;Initial Catalog=user;User ID=sa;Password=P@ssw0rd;"))
+            using (var connection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
             {
                 var ormContext = new ORMContext<Film>(connection);
                 return ormContext.GetByAll("Films");

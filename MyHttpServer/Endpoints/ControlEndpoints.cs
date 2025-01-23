@@ -44,7 +44,7 @@ namespace MyHttpServer.Endpoints
         [Get("films")]
         public IHttpResponseResult GetFilms()
         {
-            var dbConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd");
+            var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]);
             var orm = new ORMContext<Film>(dbConnection);
             var films = orm.GetByAll("Films");
 
@@ -54,7 +54,7 @@ namespace MyHttpServer.Endpoints
         [Post("films")]
         public IHttpResponseResult PostGetFilms()
         {
-            var dbConnection = new SqlConnection("Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd");
+            var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]);
             var orm = new ORMContext<Film>(dbConnection);
             var films = orm.GetByAll("Films");
             return Json(films);
@@ -69,9 +69,9 @@ namespace MyHttpServer.Endpoints
             try
             {
                 int newFilmId;
-                string connectionString = AppConfig.Instance.ConnectionString;
+                string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
 
-                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+                using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     sqlConnection.Open();
 
@@ -110,9 +110,9 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                string connectionString = AppConfig.Instance.ConnectionString;
+                string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
 
-                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+                using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     sqlConnection.Open();
 
@@ -151,9 +151,9 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                string connectionString = AppConfig.Instance.ConnectionString;
+                string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
 
-                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+                using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     sqlConnection.Open();
 
@@ -167,7 +167,7 @@ namespace MyHttpServer.Endpoints
                 }
                
 
-                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+                using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     sqlConnection.Open();
 
@@ -195,9 +195,9 @@ namespace MyHttpServer.Endpoints
         {
             try
             {
-                string connectionString = AppConfig.Instance.ConnectionString;
+                string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
 
-                using (var sqlConnection = new SqlConnection(AppConfig.Instance.ConnectionString))
+                using (var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]))
                 {
                     sqlConnection.Open();
 

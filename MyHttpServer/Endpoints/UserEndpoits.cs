@@ -14,7 +14,7 @@ namespace MyHttpServer.Endpoints
         [Get("Films")]
         public IHttpResponseResult GetUser(string login = null, string password = null)
         {
-            string connectionString = AppConfig.Instance.ConnectionString;
+            string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
 
             using var sqlConnection = new SqlConnection(connectionString);
             var dbContext = new ORMContext<Film>(sqlConnection);

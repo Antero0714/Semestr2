@@ -14,18 +14,15 @@ namespace HttpServerLibrary.Configurations
         public const string FILE_NAME = "config.json";
 
         // Поля для хранения настроек
-        public string Domain { get; set; } = "localhost";
+        public string Domain { get; set; } = "+";
         public uint Port { get; set; } = 8888;
         public string StaticDirectoryPath { get; set; } = "public/";
 
-        // SMTP настройки
-        public string SmtpServer { get; set; } = "smtp.mail.ru";
-        public int SmtpPort { get; set; } = 587;
-        public string SmtpUser { get; set; } = "andrey051407@mail.ru";
-        public string SmtpPassword { get; set; } = "cWj423B54kJm37uM6N2v";
 
-        // Строка соединения с базой данных
-        public string ConnectionString { get; set; } = "Server=your_server;Database=your_database;User Id=your_user;Password=your_password;";
+        public Dictionary<string, string> ConnectionStrings { get; set; }
+
+        // SMTP настройки
+        public EmailServiceConfiguration EmailConfig { get; set; } = new();
 
         // Singleton
         private static AppConfig? _instance;
@@ -48,7 +45,11 @@ namespace HttpServerLibrary.Configurations
 
                 return _instance!;
             }
+
+
         }
+
+
 
         [JsonConstructor]
         private AppConfig() { }
@@ -79,6 +80,18 @@ namespace HttpServerLibrary.Configurations
             return new AppConfig();
         }
 
+        public static AppConfig GetInstance()
+        {
+            if (_instance is null)
+            {
+                _instance = new AppConfig();
+                _instance.Initialize();
+            }
+
+            return _instance;
+        }
+
+
         /// <summary>
         /// Сохранение текущей конфигурации в файл
         /// </summary>
@@ -94,5 +107,29 @@ namespace HttpServerLibrary.Configurations
                 Console.WriteLine($"Ошибка при сохранении конфигурации: {ex.Message}");
             }
         }
+
+        private void Initialize()
+        {
+            if (File.Exists(AppConfig.FILE_NAME))
+            {
+                var configFile = File.ReadAllText(AppConfig.FILE_NAME);
+                _instance = JsonSerializer.Deserialize<AppConfig>(configFile);
+            }
+            else
+            {
+                Console.WriteLine($"Файл настроек {AppConfig.FILE_NAME} не найден");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Настройки EmailService
+    /// </summary>
+    public class EmailServiceConfiguration
+    {
+        public string Host { get; set; } = "smtp.mail.ru";
+        public int Port { get; set; } = 587;
+        public string UserName { get; set; } = "andrey051407@mail.ru";
+        public string Password { get; set; } = "cWj423B54kJm37uM6N2v";
     }
 }

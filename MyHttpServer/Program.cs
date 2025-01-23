@@ -3,6 +3,7 @@ using MyORMLibrary;
 using MyHttpServer.Models;
 using System.Data.SqlClient;
 using TemplateEngine;
+using HttpServerLibrary.Configurations;
 
 namespace HttpServerLibrary
 {
@@ -12,6 +13,21 @@ namespace HttpServerLibrary
         static async Task Main(string[] args)
         {
             Console.WriteLine("Сервер запускается...");
+            var config = AppConfig.GetInstance();   
+            var connectionString = config.ConnectionStrings["DefaultConnection"];
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    Console.WriteLine("Подключение к базе данных успешно!");
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Ошибка подключения к базе данных: {ex.Message}");
+            }
             await StartServerAsync();
         }
 

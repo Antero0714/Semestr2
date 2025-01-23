@@ -1,5 +1,6 @@
 ﻿using HttpServerLibrary;
 using HttpServerLibrary.Attributes;
+using HttpServerLibrary.Configurations;
 using HttpServerLibrary.HttpResponse;
 using System.Data.SqlClient;
 using System.Net;
@@ -61,9 +62,8 @@ namespace MyHttpServer.Endpoints
             email = email.Trim();
 
 
-            string connectionString = @"Data Source=localhost;Initial Catalog=User;User ID=sa;Password=P@ssw0rd";
+            using var sqlConnection = new SqlConnection(AppConfig.GetInstance().ConnectionStrings["DefaultConnection"]);
 
-            using var sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
 
             string query = "SELECT Name FROM TUserDash WHERE Name = @Name AND Password = @Password AND Email = @Email";

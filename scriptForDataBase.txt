@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[TUserDash] (
 );
 
 -- фильмы (main page)
-CREATE TABLE [dbo].[Users] (
+CREATE TABLE [dbo].[Films] (
     [Id]        INT            IDENTITY (1, 1) NOT NULL,
     [TitleRus]  NVARCHAR (255) NOT NULL,
     [TitleEng]  NVARCHAR (255) NOT NULL,
@@ -55,7 +55,7 @@ SET IDENTITY_INSERT [dbo].[TUserDash] OFF
 
 
 
-SET IDENTITY_INSERT [dbo].[Users] ON
+SET IDENTITY_INSERT [dbo].[Films] ON
 INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2072, N'Цыплёнок для Линды!', N'Chicken for Linda!', N'Сериал', N'HDRezka', N'looktoon\imgscreen\ChickenforLinda.jpg', N'1', N'2011')
 INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2074, N'Течение', N'Flow', N'Полнометражный фильм', N'Дубляж/Субтитры', N'looktoon\imgscreen\Flow.jpg', N'1', N'2020')
 INSERT INTO [dbo].[Users] ([Id], [TitleRus], [TitleEng], [Type], [Sound], [ImagePath], [Link], [Year]) VALUES (2075, N'Неуязвимая рестлерша', N'Invincible Fight Girl', N'Все сезоны', N'Субтитры', N'looktoon\imgscreen\InvincibleFightGirl.jpg', N'1', N'2021')

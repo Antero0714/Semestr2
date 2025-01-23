@@ -13,8 +13,7 @@ internal class TemplateFilmEndpoints : EndpointBase
     [Get("film")]
     public IHttpResponseResult GetFilmDetails(int id)
     {
-        string connectionString = AppConfig.Instance.ConnectionString;
-
+        string connectionString = AppConfig.GetInstance().ConnectionStrings["DefaultConnection"];
         using var connection = new SqlConnection(connectionString);
         var ormFilm = new ORMContext<Film>(connection);
         var ormFilms = new ORMContext<TemplateFilm>(connection);
