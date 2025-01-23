@@ -19,6 +19,7 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "MyHttpServer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
+EXPOSE 8888
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "MyHttpServer.dll"]
